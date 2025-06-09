@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Uma experiência épica dedicada a Kanye West, com biografia interativa, player musical vibrante, galeria de álbuns e animações futuristas.">
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" href="img/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.png" type="image/png" />
   <title>Kanye West - Universo Musical</title>
 </head>
 <body>
@@ -31,7 +31,7 @@
     <!-- Imagem Central -->
     <section class="kanye-hero" role="region" aria-label="Imagem de Kanye West">
       <div class="aura-container">
-        <img src="img/pngegg.png" class="kanye-image" alt="Imagem de Kanye West com aura futurista" loading="lazy" />
+        <img src="pngegg.png" class="kanye-image" alt="Imagem de Kanye West com aura futurista" loading="lazy" />
         <div class="aura-glow"></div>
         <div class="aura-pulse"></div>
         <div class="aura-cyber"></div>
@@ -68,7 +68,7 @@
       <div class="player-box">
         <div class="loading-spinner" aria-hidden="true"></div>
         <div class="album-art-container">
-          <img id="capa" src="img/teste.png" class="disco" alt="Capa do Álbum" loading="lazy" />
+          <img id="capa" src="teste.png" class="disco" alt="Capa do Álbum" loading="lazy" />
           <div class="parallax-effect"></div>
         </div>
         <div class="info-musica">
@@ -80,7 +80,7 @@
           </div>
         </div>
         <audio id="audio" preload="metadata">
-          <source src="audio/Flashing Lights.mp3" type="audio/mpeg" />
+          <source src="Flashing Lights.mp3" type="audio/mpeg" />
           <p>Seu navegador não suporta o elemento de áudio.</p>
         </audio>
         <div class="controles">
@@ -112,17 +112,17 @@
       <h2 class="dancing-script">Legado Musical</h2>
       <div class="gallery-container">
         <div class="album-card" data-album="Graduation">
-          <img src="img/teste.png" alt="Graduation" loading="lazy" />
+          <img src="teste.png" alt="Graduation" loading="lazy" />
           <h3>Graduation</h3>
           <p>2007</p>
         </div>
         <div class="album-card" data-album="Ye">
-          <img src="img/gtw.png" alt="Ye" loading="lazy" />
+          <img src="gtw.png" alt="Ye" loading="lazy" />
           <h3>Ye</h3>
           <p>2018</p>
         </div>
         <div class="album-card" data-album="Yeezus">
-          <img src="img/bound 2.png" alt="Yeezus" loading="lazy" />
+          <img src="bound 2.png" alt="Yeezus" loading="lazy" />
           <h3>Yeezus</h3>
           <p>2013</p>
         </div>
@@ -202,9 +202,9 @@
 
     // Lista de Músicas
     const musicas = [
-      { titulo: 'Flashing Lights', arquivo: 'audio/Flashing Lights.mp3', capa: 'img/teste.png', album: 'Graduation' },
-      { titulo: 'Ghost Town', arquivo: 'audio/Ghost Town.mp3', capa: 'img/gtw.png', album: 'Ye' },
-      { titulo: 'Bound 2', arquivo: 'audio/Kanye West - Bound 2 (audio).mp3', capa: 'img/bound 2.png', album: 'Yeezus' }
+      { titulo: 'Flashing Lights', arquivo: 'Flashing Lights.mp3', capa: 'teste.png', album: 'Graduation' },
+      { titulo: 'Ghost Town', arquivo: 'Ghost Town.mp3', capa: 'gtw.png', album: 'Ye' },
+      { titulo: 'Bound 2', arquivo: 'Kanye West - Bound 2 (audio).mp3', capa: 'bound 2.png', album: 'Yeezus' }
     ];
 
     let indice = 0;
@@ -316,86 +316,60 @@
 
     btnNext.addEventListener('click', () => {
       pausar();
-      capa.classList.add('fade-out');
       indice = (indice + 1) % musicas.length;
-      setTimeout(() => {
-        atualizarUI();
-        if (isPlaying) tocar();
-      }, 500);
+      atualizarUI();
     });
 
     btnPrev.addEventListener('click', () => {
       pausar();
-      capa.classList.add('fade-out');
       indice = (indice - 1 + musicas.length) % musicas.length;
-      setTimeout(() => {
-        atualizarUI();
-        if (isPlaying) tocar();
-      }, 500);
+      atualizarUI();
     });
 
-    // Progresso
+    // Atualizar Progresso
     audio.addEventListener('timeupdate', () => {
       if (!isNaN(audio.duration)) {
-        const posicao = (audio.currentTime / audio.duration) * 100;
-        progresso.value = posicao;
+        const progressoPercentual = (audio.currentTime / audio.duration) * 100;
+        progresso.value = progressoPercentual;
         tempoAtual.textContent = formatarTempo(audio.currentTime);
         duracao.textContent = formatarTempo(audio.duration);
       }
     });
 
-    const atualizarProgresso = debounce(() => {
-      const novaPosicao = (progresso.value / 100) * audio.duration;
-      audio.currentTime = isNaN(novaPosicao) ? 0 : novaPosicao;
-    }, 100);
-
-    progresso.addEventListener('input', atualizarProgresso);
-
-    audio.addEventListener('loadedmetadata', () => {
-      duracao.textContent = formatarTempo(audio.duration);
+    // Controle de Progresso
+    progresso.addEventListener('input', () => {
+      const novoTempo = (progresso.value / 100) * audio.duration;
+      audio.currentTime = novoTempo;
     });
 
-    audio.addEventListener('ended', () => {
-      capa.classList.add('fade-out');
-      indice = (indice + 1) % musicas.length;
-      setTimeout(() => {
-        atualizarUI();
-        if (isPlaying) tocar();
-      }, 500);
-    });
-
-    // Volume
+    // Controle de Volume
     volume.addEventListener('input', () => {
       audio.volume = volume.value;
     });
 
-    // Playlist
+    // Atualizar Playlist
     function atualizarPlaylist() {
       playlist.innerHTML = '';
       musicas.forEach((musica, i) => {
         const li = document.createElement('li');
-        li.textContent = `${musica.titulo} - ${musica.album}`;
-        li.dataset.index = i;
-        li.classList.toggle('active', i === indice);
+        li.textContent = musica.titulo;
+        if (i === indice) li.classList.add('active');
         li.addEventListener('click', () => {
           pausar();
           indice = i;
           atualizarUI();
-          tocar();
         });
         playlist.appendChild(li);
       });
     }
 
-    // Tabs
+    // Tabs da Biografia
     tabButtons.forEach(button => {
       button.addEventListener('click', () => {
         tabButtons.forEach(btn => btn.classList.remove('active'));
         tabPanes.forEach(pane => pane.classList.remove('active'));
         button.classList.add('active');
-        const pane = document.getElementById(button.dataset.tab);
-        pane.classList.add('active');
-        pane.style.animation = 'flipIn 0.7s ease-out';
+        document.getElementById(button.dataset.tab).classList.add('active');
       });
     });
 
@@ -404,7 +378,7 @@
       card.addEventListener('click', () => {
         const album = card.dataset.album;
         modalTitle.textContent = album;
-        modalYear.textContent = `Lançado em: ${albums[album].year}`;
+        modalYear.textContent = albums[album].year;
         modalHistory.textContent = albums[album].history;
         modalTracks.innerHTML = '';
         albums[album].tracks.forEach(track => {
@@ -413,64 +387,45 @@
           modalTracks.appendChild(li);
         });
         modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        showToast(`Explorando: ${album}`);
       });
     });
 
     modalClose.addEventListener('click', () => {
       modal.style.display = 'none';
-      document.body.style.overflow = 'auto';
     });
 
-    window.addEventListener('click', e => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-      }
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.style.display = 'none';
     });
 
-    // Tema Claro/Escuro
+    // Alternar Tema
     themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('light-theme');
-      const isLight = document.body.classList.contains('light-theme');
-      themeToggle.querySelector('.icon').innerHTML = isLight
-        ? '<path d="M12 8a4 4 0 100 8 4 4 0 000-8zm0 13a9 9 0 110-18 9 9 0 010 18zm0-2a7 7 0 100-14 7 7 0 000 14z"/>'
-        : '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
     });
 
     // Animação de Scroll
-    function revealElements() {
-      const reveals = document.querySelectorAll('.reveal');
-      reveals.forEach((element, index) => {
-        const windowHeight = window.innerHeight;
-        const elementTop = element.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 150) {
-          element.classList.add('active');
-          element.style.animationDelay = `${index * 0.2}s`;
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
         }
       });
-    }
+    }, { threshold: 0.1 });
 
-    window.addEventListener('scroll', revealElements);
+    revealElements.forEach(element => observer.observe(element));
 
-    // Paralaxe na Capa
-    window.addEventListener('mousemove', e => {
-      const container = document.querySelector('.album-art-container');
-      const rect = container.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-      const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-      container.style.transform = `perspective(1000px) rotateX(${y * 10}deg) rotateY(${x * 10}deg)`;
+    // Carregar Música Inicial
+    audio.addEventListener('loadedmetadata', () => {
+      duracao.textContent = formatarTempo(audio.duration);
     });
 
-    // Inicialização
+    audio.addEventListener('ended', () => {
+      indice = (indice + 1) % musicas.length;
+      atualizarUI();
+    });
+
     atualizarUI();
-    revealElements();
-
-    // Limpeza
-    window.addEventListener('unload', () => {
-      audio.pause();
-    });
   </script>
 </body>
 </html>
