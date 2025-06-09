@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Uma experiência épica dedicada a Kanye West, com biografia interativa, player musical vibrante, galeria de álbuns e animações futuristas.">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="img/favicon.png" type="image/png" />
+  <title>Kanye West - Universo Musical</title>
+</head>
+<body>
+  <!-- Fundo Animado -->
+  <div class="background-shapes">
+    <div class="shape circle"></div>
+    <div class="shape triangle"></div>
+    <div class="shape circle"></div>
+  </div>
+
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="header-content">
+      <h1 class="glitch-text" data-text="Kanye West">Kanye West</h1>
+      <button id="theme-toggle" class="theme-btn" aria-label="Alternar tema claro/escuro">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Seção Principal -->
+  <main class="container">
+    <!-- Imagem Central -->
+    <section class="kanye-hero" role="region" aria-label="Imagem de Kanye West">
+      <div class="aura-container">
+        <img src="img/pngegg.png" class="kanye-image" alt="Imagem de Kanye West com aura futurista" loading="lazy" />
+        <div class="aura-glow"></div>
+        <div class="aura-pulse"></div>
+        <div class="aura-cyber"></div>
+      </div>
+    </section>
+
+    <!-- Biografia -->
+    <section class="biografia reveal" role="region" aria-label="Biografia de Kanye West">
+      <div class="bio-video"></div>
+      <h2 class="dancing-script">A Lenda</h2>
+      <div class="bio-tabs">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="bio">Biografia</button>
+          <button class="tab-btn" data-tab="carreira">Carreira</button>
+          <button class="tab-btn" data-tab="impacto">Impacto</button>
+        </div>
+        <div class="tab-content">
+          <div id="bio" class="tab-pane active">
+            <p>Kanye West, nascido em 8 de junho de 1977, é um gênio criativo que transcende a música. De Chicago, ele começou como produtor antes de redefinir o hip-hop com sua visão única.</p>
+          </div>
+          <div id="carreira" class="tab-pane">
+            <p>Com álbuns como 'Graduation' e 'Ye', Kanye misturou gêneros e inovou na produção. Sua marca Yeezy revolucionou a moda, criando um império cultural.</p>
+          </div>
+          <div id="impacto" class="tab-pane">
+            <p>Kanye é um ícone cultural, influenciando música, moda e arte. Sua coragem em desafiar normas o torna uma figura lendária e polarizadora.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Player de Áudio -->
+    <section class="audio-player reveal" role="region" aria-label="Player de Áudio">
+      <h2 class="dancing-script">Som da Alma</h2>
+      <div class="player-box">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <div class="album-art-container">
+          <img id="capa" src="img/teste.png" class="disco" alt="Capa do Álbum" loading="lazy" />
+          <div class="parallax-effect"></div>
+        </div>
+        <div class="info-musica">
+          <p id="titulo-musica">Flashing Lights</p>
+          <div class="progresso">
+            <span id="tempo-atual">0:00</span>
+            <input type="range" id="progresso" min="0" max="100" value="0" aria-label="Barra de progresso do áudio" />
+            <span id="duracao">0:00</span>
+          </div>
+        </div>
+        <audio id="audio" preload="metadata">
+          <source src="audio/Flashing Lights.mp3" type="audio/mpeg" />
+          <p>Seu navegador não suporta o elemento de áudio.</p>
+        </audio>
+        <div class="controles">
+          <button id="btn-prev" class="btn ripple" aria-label="Música anterior">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+          </button>
+          <button id="btn-play" class="btn ripple" aria-label="Tocar ou pausar música">
+            <svg class="icon play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button id="btn-next" class="btn ripple" aria-label="Próxima música">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M18 6h-2v12h2zm-3.5 6l-8.5 6V6z"/></svg>
+          </button>
+        </div>
+        <div class="volume">
+          <label for="volume">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.17 2.5-3.97z"/></svg>
+          </label>
+          <input type="range" id="volume" min="0" max="1" step="0.01" value="1" aria-label="Controle de volume" />
+        </div>
+      </div>
+      <div class="playlist">
+        <h3>Playlist</h3>
+        <ul id="playlist"></ul>
+      </div>
+    </section>
+
+    <!-- Galeria de Álbuns -->
+    <section class="album-gallery reveal" role="region" aria-label="Galeria de Álbuns">
+      <h2 class="dancing-script">Legado Musical</h2>
+      <div class="gallery-container">
+        <div class="album-card" data-album="Graduation">
+          <img src="img/teste.png" alt="Graduation" loading="lazy" />
+          <h3>Graduation</h3>
+          <p>2007</p>
+        </div>
+        <div class="album-card" data-album="Ye">
+          <img src="img/gtw.png" alt="Ye" loading="lazy" />
+          <h3>Ye</h3>
+          <p>2018</p>
+        </div>
+        <div class="album-card" data-album="Yeezus">
+          <img src="img/bound 2.png" alt="Yeezus" loading="lazy" />
+          <h3>Yeezus</h3>
+          <p>2013</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de Álbuns -->
+  <div class="modal" id="album-modal">
+    <div class="modal-content">
+      <span class="modal-close">×</span>
+      <h2 id="modal-title"></h2>
+      <p id="modal-year"></p>
+      <p id="modal-history"></p>
+      <h3>Faixas</h3>
+      <ul id="modal-tracks"></ul>
+    </div>
+  </div>
+
+  <!-- Toast de Notificação -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Rodapé -->
+  <footer class="rodape reveal">
+    <p>Desenvolvido por Raul © 2025 | Um tributo ao gênio Kanye West</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/iaeesteves/" target="_blank" aria-label="Instagram">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.33 3.608 1.305.975.975 1.243 2.242 1.305 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.33 2.633-1.305 3.608-.975.975-2.242 1.243-3.608 1.305-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.33-3.608-1.305-.975-.975-1.243-2.242-1.305-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.33-2.633 1.305-3.608.975-.975 2.242-1.243 3.608-1.305 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.54.07-2.827.377-3.846 1.396-1.019 1.019-1.326 2.307-1.396 3.846-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.07 1.54.377 2.827 1.396 3.846 1.019 1.019 2.307 1.326 3.846 1.396 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.54-.07 2.827-.377 3.846-1.396 1.019-1.019 1.326-2.307 1.396-3.846.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.07-1.54-.377-2.827-1.396-3.846-1.019-1.019-2.307-1.326-3.846-1.396-1.28-.058-1.688-.072-4.947-.072z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Elementos do DOM
+    const audio = document.getElementById('audio');
+    const capa = document.getElementById('capa');
+    const btnPlay = document.getElementById('btn-play');
+    const btnNext = document.getElementById('btn-next');
+    const btnPrev = document.getElementById('btn-prev');
+    const progresso = document.getElementById('progresso');
+    const tempoAtual = document.getElementById('tempo-atual');
+    const duracao = document.getElementById('duracao');
+    const tituloMusica = document.getElementById('titulo-musica');
+    const volume = document.getElementById('volume');
+    const loadingSpinner = document.querySelector('.loading-spinner');
+    const playlist = document.getElementById('playlist');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    const albumCards = document.querySelectorAll('.album-card');
+    const themeToggle = document.getElementById('theme-toggle');
+    const modal = document.getElementById('album-modal');
+    const modalClose = document.querySelector('.modal-close');
+    const modalTitle = document.getElementById('modal-title');
+    const modalYear = document.getElementById('modal-year');
+    const modalHistory = document.getElementById('modal-history');
+    const modalTracks = document.getElementById('modal-tracks');
+    const toast = document.getElementById('toast');
+
+    // Dados dos Álbuns
+    const albums = {
+      'Graduation': {
+        year: 2007,
+        history: 'Lançado em 2007, "Graduation" é o terceiro álbum de Kanye West, marcando sua evolução sonora com sintetizadores vibrantes e temas de triunfo. Hits como "Stronger" e "Good Life" definiram a era.',
+        tracks: ['Good Morning', 'Champion', 'Stronger', 'Good Life', 'Can\'t Tell Me Nothing', 'Flashing Lights']
+      },
+      'Ye': {
+        year: 2018,
+        history: 'Ye, lançado em 2018, é um álbum introspectivo gravado em Wyoming. Com faixas como "Ghost Town", reflete a vulnerabilidade de Kanye em meio a controvérsias pessoais.',
+        tracks: ['I Thought About Killing You', 'Yikes', 'All Mine', 'Ghost Town', 'Violent Crimes']
+      },
+      'Yeezus': {
+        year: 2013,
+        history: 'Yeezus (2013) é um marco experimental, com produção crua e eletrônica. Faixas como "Black Skinhead" e "Bound 2" mostram Kanye desafiando as normas do hip-hop.',
+        tracks: ['On Sight', 'Black Skinhead', 'I Am a God', 'New Slaves', 'Hold My Liquor', 'Bound 2']
+      }
+    };
+
+    // Lista de Músicas
+    const musicas = [
+      { titulo: 'Flashing Lights', arquivo: 'audio/Flashing Lights.mp3', capa: 'img/teste.png', album: 'Graduation' },
+      { titulo: 'Ghost Town', arquivo: 'audio/Ghost Town.mp3', capa: 'img/gtw.png', album: 'Ye' },
+      { titulo: 'Bound 2', arquivo: 'audio/Kanye West - Bound 2 (audio).mp3', capa: 'img/bound 2.png', album: 'Yeezus' }
+    ];
+
+    let indice = 0;
+    let isPlaying = false;
+
+    // Formatar Tempo
+    function formatarTempo(segundos) {
+      if (isNaN(segundos)) return '0:00';
+      const min = Math.floor(segundos / 60);
+      const seg = Math.floor(segundos % 60);
+      return `${min}:${seg < 10 ? '0' + seg : seg}`;
+    }
+
+    // Mostrar Toast
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('active');
+      setTimeout(() => toast.classList.remove('active'), 3000);
+    }
+
+    // Toggle Loading
+    function toggleLoading(show) {
+      loadingSpinner.classList.toggle('hidden', !show);
+      capa.classList.toggle('hidden', show);
+    }
+
+    // Atualizar Interface
+    function atualizarUI() {
+      try {
+        toggleLoading(true);
+        audio.src = musicas[indice].arquivo;
+        capa.src = musicas[indice].capa;
+        capa.setAttribute('loading', 'lazy');
+        tituloMusica.textContent = musicas[indice].titulo;
+        capa.classList.remove('fade-out');
+        audio.load();
+        if (isPlaying) {
+          audio.play().then(() => {
+            btnPlay.querySelector('.play-icon').innerHTML = '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
+            capa.classList.add('vibrando');
+            tituloMusica.classList.add('pulse');
+            toggleLoading(false);
+            atualizarPlaylist();
+            showToast(`Tocando: ${musicas[indice].titulo}`);
+          }).catch(error => {
+            console.error('Erro ao tocar áudio:', error);
+            btnPlay.querySelector('.play-icon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+            capa.classList.remove('vibrando');
+            tituloMusica.classList.remove('pulse');
+            toggleLoading(false);
+            showToast('Erro ao carregar música');
+          });
+        } else {
+          toggleLoading(false);
+          atualizarPlaylist();
+        }
+      } catch (error) {
+        console.error('Erro ao atualizar música:', error);
+        tituloMusica.textContent = 'Erro: Arquivo não encontrado';
+        toggleLoading(false);
+        showToast('Erro: Arquivo não encontrado');
+      }
+    }
+
+    // Tocar Música
+    function tocar() {
+      isPlaying = true;
+      audio.play().then(() => {
+        btnPlay.querySelector('.play-icon').innerHTML = '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
+        capa.classList.add('vibrando');
+        tituloMusica.classList.add('pulse');
+      }).catch(error => {
+        console.error('Erro ao tocar:', error);
+        isPlaying = false;
+        showToast('Erro ao tocar música');
+      });
+    }
+
+    // Pausar Música
+    function pausar() {
+      isPlaying = false;
+      audio.pause();
+      btnPlay.querySelector('.play-icon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+      capa.classList.remove('vibrando');
+      tituloMusica.classList.remove('pulse');
+    }
+
+    // Debounce
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    // Eventos dos Botões
+    btnPlay.addEventListener('click', () => {
+      if (audio.paused) {
+        tocar();
+      } else {
+        pausar();
+      }
+    });
+
+    btnNext.addEventListener('click', () => {
+      pausar();
+      capa.classList.add('fade-out');
+      indice = (indice + 1) % musicas.length;
+      setTimeout(() => {
+        atualizarUI();
+        if (isPlaying) tocar();
+      }, 500);
+    });
+
+    btnPrev.addEventListener('click', () => {
+      pausar();
+      capa.classList.add('fade-out');
+      indice = (indice - 1 + musicas.length) % musicas.length;
+      setTimeout(() => {
+        atualizarUI();
+        if (isPlaying) tocar();
+      }, 500);
+    });
+
+    // Progresso
+    audio.addEventListener('timeupdate', () => {
+      if (!isNaN(audio.duration)) {
+        const posicao = (audio.currentTime / audio.duration) * 100;
+        progresso.value = posicao;
+        tempoAtual.textContent = formatarTempo(audio.currentTime);
+        duracao.textContent = formatarTempo(audio.duration);
+      }
+    });
+
+    const atualizarProgresso = debounce(() => {
+      const novaPosicao = (progresso.value / 100) * audio.duration;
+      audio.currentTime = isNaN(novaPosicao) ? 0 : novaPosicao;
+    }, 100);
+
+    progresso.addEventListener('input', atualizarProgresso);
+
+    audio.addEventListener('loadedmetadata', () => {
+      duracao.textContent = formatarTempo(audio.duration);
+    });
+
+    audio.addEventListener('ended', () => {
+      capa.classList.add('fade-out');
+      indice = (indice + 1) % musicas.length;
+      setTimeout(() => {
+        atualizarUI();
+        if (isPlaying) tocar();
+      }, 500);
+    });
+
+    // Volume
+    volume.addEventListener('input', () => {
+      audio.volume = volume.value;
+    });
+
+    // Playlist
+    function atualizarPlaylist() {
+      playlist.innerHTML = '';
+      musicas.forEach((musica, i) => {
+        const li = document.createElement('li');
+        li.textContent = `${musica.titulo} - ${musica.album}`;
+        li.dataset.index = i;
+        li.classList.toggle('active', i === indice);
+        li.addEventListener('click', () => {
+          pausar();
+          indice = i;
+          atualizarUI();
+          tocar();
+        });
+        playlist.appendChild(li);
+      });
+    }
+
+    // Tabs
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+        button.classList.add('active');
+        const pane = document.getElementById(button.dataset.tab);
+        pane.classList.add('active');
+        pane.style.animation = 'flipIn 0.7s ease-out';
+      });
+    });
+
+    // Modal de Álbuns
+    albumCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const album = card.dataset.album;
+        modalTitle.textContent = album;
+        modalYear.textContent = `Lançado em: ${albums[album].year}`;
+        modalHistory.textContent = albums[album].history;
+        modalTracks.innerHTML = '';
+        albums[album].tracks.forEach(track => {
+          const li = document.createElement('li');
+          li.textContent = track;
+          modalTracks.appendChild(li);
+        });
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        showToast(`Explorando: ${album}`);
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    window.addEventListener('click', e => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Tema Claro/Escuro
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      const isLight = document.body.classList.contains('light-theme');
+      themeToggle.querySelector('.icon').innerHTML = isLight
+        ? '<path d="M12 8a4 4 0 100 8 4 4 0 000-8zm0 13a9 9 0 110-18 9 9 0 010 18zm0-2a7 7 0 100-14 7 7 0 000 14z"/>'
+        : '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+    });
+
+    // Animação de Scroll
+    function revealElements() {
+      const reveals = document.querySelectorAll('.reveal');
+      reveals.forEach((element, index) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 150) {
+          element.classList.add('active');
+          element.style.animationDelay = `${index * 0.2}s`;
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealElements);
+
+    // Paralaxe na Capa
+    window.addEventListener('mousemove', e => {
+      const container = document.querySelector('.album-art-container');
+      const rect = container.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+      const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+      container.style.transform = `perspective(1000px) rotateX(${y * 10}deg) rotateY(${x * 10}deg)`;
+    });
+
+    // Inicialização
+    atualizarUI();
+    revealElements();
+
+    // Limpeza
+    window.addEventListener('unload', () => {
+      audio.pause();
+    });
+  </script>
+</body>
+</html>
